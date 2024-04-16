@@ -431,6 +431,31 @@
         </span>
        </xsl:if>
 
+        <!-- RCM 362 -->
+        <xsl:if test="marc:datafield[@tag=362]">
+            <span class="results_summary description">
+                <span class="label">Dates of publication: </span>
+                <xsl:for-each select="marc:datafield[@tag=362]">
+                    <span property="description">
+                        <xsl:call-template name="chopPunctuation">
+                            <xsl:with-param name="chopString">
+                                <xsl:call-template name="subfieldSelect">
+                                    <xsl:with-param name="codes">abc</xsl:with-param>
+                                </xsl:call-template>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </span>
+                    <xsl:choose>
+                        <xsl:when test="position()=last()">
+                            <xsl:text>.</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>; </xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </span>
+        </xsl:if>
 
             <!-- Content Type -->
             <xsl:if test="marc:datafield[@tag=336] or marc:datafield[@tag=337] or marc:datafield[@tag=338]">
@@ -553,6 +578,68 @@
                 </xsl:for-each>
             </span>
         </xsl:if>
+
+        <!-- RCM 028 -->
+        <xsl:for-each select="marc:datafield[@tag=028]">
+            <span class="results_summary 028_note">
+                <span class="label">
+                    <xsl:choose>
+                        <xsl:when test="@ind1=2">
+                            <xsl:text>Plate number: </xsl:text>
+                        </xsl:when>
+                        <xsl:when test="@ind1=3">
+                            <xsl:text>Publisher number: </xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>Number: </xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </span>
+                <xsl:call-template name="subfieldSelect">
+                    <xsl:with-param name="codes">abcdef</xsl:with-param>
+                </xsl:call-template>
+            </span>
+        </xsl:for-each>
+
+        <!-- RCM 254 -->
+
+        <xsl:if test="marc:datafield[@tag=254]">
+            <span class="results_summary musical_pres">
+                <span class="label">Musical Presentation: </span>
+                <xsl:for-each select="marc:datafield[@tag=254]">
+                    <xsl:call-template name="subfieldSelect">
+                        <xsl:with-param name="codes">a</xsl:with-param>
+                        <xsl:with-param name="delimeter">, </xsl:with-param>
+                    </xsl:call-template>
+                    <xsl:choose>
+                        <xsl:when test="position()=last()">
+                            <xsl:text></xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>; </xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </span>
+        </xsl:if>
+
+        <!-- RCM 800 field -->
+        <!--
+<xsl:if test="marc:datafield[@tag=800]">
+<span class="results_summary date_of_work">
+<span class="label">Date of Work: </span>
+<xsl:for-each select="marc:datafield[@tag=800]">
+<xsl:call-template name="subfieldSelect">
+<xsl:with-param name="codes">f</xsl:with-param>
+<xsl:with-param name="delimeter">, </xsl:with-param>
+</xsl:call-template>
+<xsl:choose><xsl:when
+        test="position()=last()"><xsl:text></xsl:text></xsl:when><xsl:otherwise><xsl:text>;
+        </xsl:text></xsl:otherwise></xsl:choose>
+</xsl:for-each>
+</span>
+</xsl:if>
+-->
 
         <xsl:if test="marc:datafield[@tag=088]">
             <span class="results_summary report_number">
@@ -1271,6 +1358,84 @@
                     </xsl:call-template>
                 </xsl:for-each>
                 <xsl:choose><xsl:when test="position()=last()"><xsl:text></xsl:text></xsl:when><xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise></xsl:choose>
+            </span>
+        </xsl:if>
+
+        <!-- RCM 382 note -->
+        <xsl:if test="marc:datafield[@tag=382]">
+            <span class="results_summary 382_note">
+                <span class="label">Instruments/voices: </span>
+                <xsl:for-each select="marc:datafield[@tag=382]">
+                    <xsl:call-template name="subfieldSelect">
+                        <xsl:with-param name="codes">abcdgo</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:for-each>
+                <xsl:choose>
+                    <xsl:when test="position()=last()">
+                        <xsl:text></xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
+        </xsl:if>
+
+        <!-- RCM 383 note -->
+        <xsl:if test="marc:datafield[@tag=383]">
+            <span class="results_summary 383_note">
+                <span class="label">Thematic number: </span>
+                <xsl:for-each select="marc:datafield[@tag=383]">
+                    <xsl:call-template name="subfieldSelect">
+                        <xsl:with-param name="codes">abcdgo</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:for-each>
+                <xsl:choose>
+                    <xsl:when test="position()=last()">
+                        <xsl:text></xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
+        </xsl:if>
+
+        <!-- RCM 987 -->
+        <xsl:for-each select="marc:datafield[@tag=987]">
+            <span class="results_summary 987_shelf">
+                <span class="label">Shelfmark: </span>
+                <xsl:call-template name="subfieldSelect">
+                    <xsl:with-param name="codes">a</xsl:with-param>
+                </xsl:call-template>
+                <xsl:choose>
+                    <xsl:when test="position()=last()">
+                        <xsl:text></xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
+        </xsl:for-each>
+
+        <!-- RCM 518 -->
+        <xsl:if test="marc:datafield[@tag=518]">
+            <span class="results_summary 518_date">
+                <span class="label">Date: </span>
+                <xsl:for-each select="marc:datafield[@tag=518]">
+                    <xsl:call-template name="subfieldSelect">
+                        <xsl:with-param name="codes">a</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:for-each>
+                <xsl:choose>
+                    <xsl:when test="position()=last()">
+                        <xsl:text></xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
             </span>
         </xsl:if>
 
