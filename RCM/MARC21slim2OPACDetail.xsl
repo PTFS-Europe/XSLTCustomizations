@@ -1318,18 +1318,6 @@
             </span>
         </xsl:for-each>
 
-        <xsl:if test="marc:datafield[@tag=502]">
-            <span class="results_summary diss_note">
-                <span class="label">Dissertation note: </span>
-                <xsl:for-each select="marc:datafield[@tag=502]">
-                    <xsl:call-template name="subfieldSelect">
-                        <xsl:with-param name="codes">abcdgo</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:for-each>
-                <xsl:choose><xsl:when test="position()=last()"><xsl:text></xsl:text></xsl:when><xsl:otherwise><xsl:text> </xsl:text></xsl:otherwise></xsl:choose>
-            </span>
-        </xsl:if>
-
         <!-- RCM 382 note -->
         <xsl:if test="marc:datafield[@tag=382]">
             <span class="results_summary 382_note">
