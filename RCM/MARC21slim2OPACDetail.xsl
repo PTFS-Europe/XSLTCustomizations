@@ -1353,7 +1353,17 @@
         <!-- RCM 383 note -->
         <xsl:if test="marc:datafield[@tag=383]">
             <span class="results_summary 383_note">
-                <span class="label">Thematic number: </span>
+                <xsl:choose>
+                    <xsl:when test="marc:datafield[@tag=383]/marc:subfield[@code='a'] != ''">
+                        <span class="label">Serial number: </span>
+                    </xsl:when>
+                    <xsl:when test="marc:datafield[@tag=383]/marc:subfield[@code='e'] != ''">
+                        <span class="label">Opus number: </span>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="label">Thematic number: </span>
+                    </xsl:otherwise>
+                </xsl:choose>
                 <xsl:for-each select="marc:datafield[@tag=383]">
                     <xsl:call-template name="subfieldSelect">
                         <xsl:with-param name="codes">abcdgo</xsl:with-param>
