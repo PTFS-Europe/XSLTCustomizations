@@ -236,7 +236,7 @@
         <xsl:if test="$show_analytics_link='1'">
             <xsl:element name="span">
                 <xsl:attribute name="class">results_summary analytics <xsl:value-of select="$leader7_class"/></xsl:attribute>
-                <span class="label">Analytics: </span>
+                <span class="label">Volume contents: </span>
                 <a>
                 <xsl:choose>
                     <xsl:when test="$UseControlNumber = '1' and marc:controlfield[@tag=001]">
@@ -253,7 +253,7 @@
                         <xsl:attribute name="href">/cgi-bin/koha/opac-search.pl?q=<xsl:value-of select="str:encode-uri($title_query, true())"/></xsl:attribute>
                     </xsl:otherwise>
                 </xsl:choose>
-                <xsl:text>Show analytics</xsl:text>
+                <xsl:text>See contents</xsl:text>
                 </a>
             </xsl:element>
         </xsl:if>
