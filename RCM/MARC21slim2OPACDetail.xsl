@@ -719,29 +719,55 @@
             </span>
         </xsl:if>
 
-        <xsl:if test="marc:datafield[@tag=130]|marc:datafield[@tag=240]|marc:datafield[@tag=730][@ind2!=2]">
+        <xsl:if test="marc:datafield[@tag=130]|marc:datafield[@tag=240]|marc:datafield[@tag=730]">
             <span class="results_summary uniform_titles">
                 <span class="label">Uniform titles: </span>
-                <ul class="resource_list">
-                    <xsl:for-each select="marc:datafield[@tag=130]|marc:datafield[@tag=240]|marc:datafield[@tag=730][@ind2!=2]">
-                        <li>
-                            <span property="alternateName">
-                                <xsl:if test="marc:subfield[@code='i']">
+                <xsl:for-each
+                    select="marc:datafield[@tag=130]|marc:datafield[@tag=240]|marc:datafield[@tag=730]">
+                    <span property="alternateName">
+                        <a>
+                            <xsl:choose>
+                                <xsl:when test="marc:subfield[@code=9]">
+                                    <xsl:attribute name="href">
+                                        /cgi-bin/koha/opac-search.pl?q=an:<xsl:value-of
+                                            select="marc:subfield[@code=9]" /></xsl:attribute>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:attribute name="href">
+                                        /cgi-bin/koha/opac-search.pl?q=ti:<xsl:value-of
+                                            select="$TracingQuotesLeft" /><xsl:value-of
+                                            select="marc:subfield[@code='a']" /><xsl:value-of
+                                            select="$TracingQuotesRight" /></xsl:attribute>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:call-template name="chopPunctuation">
+                                <xsl:with-param name="chopString">
                                     <xsl:call-template name="subfieldSelect">
-                                        <xsl:with-param name="codes">i</xsl:with-param>
+                                        <xsl:with-param name="codes">adfgklmnoprs</xsl:with-param>
                                     </xsl:call-template>
-                                </xsl:if>
-                                <xsl:text> </xsl:text>
-                                <xsl:for-each select="marc:subfield">
-                                    <xsl:if test="contains('adfghklmnoprst',@code)">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:text> </xsl:text>
-                                    </xsl:if>
-                                </xsl:for-each>
-                            </span>
-                        </li>
-                    </xsl:for-each>
-                </ul>
+                                </xsl:with-param>
+                            </xsl:call-template>
+                        </a>
+                    </span>
+                    <xsl:if test="marc:subfield[@code=9]">
+                        <a class='authlink'>
+                            <xsl:attribute name="href">
+                                /cgi-bin/koha/opac-authoritiesdetail.pl?authid=<xsl:value-of
+                                    select="marc:subfield[@code=9]" /></xsl:attribute>
+                            <xsl:element name="img">
+                                <xsl:attribute name="src">/opac-tmpl/<xsl:value-of
+                                        select="$theme" />/images/filefind.png</xsl:attribute>
+                                <xsl:attribute name="style">vertical-align:middle</xsl:attribute>
+                                <xsl:attribute name="height">15</xsl:attribute>
+                                <xsl:attribute name="width">15</xsl:attribute>
+                            </xsl:element>
+                        </a>
+                    </xsl:if>
+                    <xsl:choose>
+                        <xsl:when test="position()=last()"></xsl:when>
+                        <xsl:otherwise> | </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
             </span>
         </xsl:if>
 
