@@ -1146,6 +1146,70 @@
 
         <xsl:call-template name="show-lang-041" />
 
+        <!-- RCM Uniform title -->
+        <xsl:if test="marc:datafield[@tag=240]">
+            <span class="results_summary uni_title">
+                <span class="label">Uniform title: </span>
+                <xsl:for-each select="marc:datafield[@tag=240]">
+                    <a>
+                        <xsl:choose>
+                            <xsl:when test="marc:subfield[@code=9]">
+                                <xsl:attribute name="href">/cgi-bin/koha/opac-search.pl?q=an:<xsl:value-of
+                                        select="marc:subfield[@code=9]" /></xsl:attribute>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="href">/cgi-bin/koha/opac-search.pl?q=ti:<xsl:value-of
+                                        select="marc:subfield[@code='a']" /></xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:call-template name="chopPunctuation">
+                            <xsl:with-param name="chopString">
+                                <xsl:call-template name="subfieldSelect">
+                                    <xsl:with-param name="codes">adfgklmnoprs</xsl:with-param>
+                                </xsl:call-template>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </a>
+                    <xsl:choose>
+                        <xsl:when test="position()=last()"></xsl:when>
+                        <xsl:otherwise> | </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </span>
+        </xsl:if>
+
+        <!-- RCM 130 Uniform title -->
+        <xsl:if test="marc:datafield[@tag=130]">
+            <span class="results_summary uni_title">
+                <span class="label">Uniform title: </span>
+                <xsl:for-each select="marc:datafield[@tag=130]">
+                    <a>
+                        <xsl:choose>
+                            <xsl:when test="marc:subfield[@code=9]">
+                                <xsl:attribute name="href">/cgi-bin/koha/opac-search.pl?q=an:<xsl:value-of
+                                        select="marc:subfield[@code=9]" /></xsl:attribute>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:attribute name="href">/cgi-bin/koha/opac-search.pl?q=ti:<xsl:value-of
+                                        select="marc:subfield[@code='a']" /></xsl:attribute>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:call-template name="chopPunctuation">
+                            <xsl:with-param name="chopString">
+                                <xsl:call-template name="subfieldSelect">
+                                    <xsl:with-param name="codes">adfgklmnoprs</xsl:with-param>
+                                </xsl:call-template>
+                            </xsl:with-param>
+                        </xsl:call-template>
+                    </a>
+                    <xsl:choose>
+                        <xsl:when test="position()=last()"></xsl:when>
+                        <xsl:otherwise> | </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:for-each>
+            </span>
+        </xsl:if>
+
         <!-- Publisher Statement: Alternate Graphic Representation (MARC 880) -->
         <xsl:if test="$display880">
             <xsl:call-template name="m880Select">
@@ -1241,6 +1305,66 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </div>
+        </xsl:if>
+
+        <!-- RCM 382 note -->
+        <xsl:if test="marc:datafield[@tag=382]">
+            <span class="results_summary 382_note">
+                <span class="label">Instruments/voices: </span>
+                <xsl:for-each select="marc:datafield[@tag=382]">
+                    <xsl:call-template name="subfieldSelect">
+                        <xsl:with-param name="codes">abcdgo</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:for-each>
+                <xsl:choose>
+                    <xsl:when test="position()=last()">
+                        <xsl:text></xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
+        </xsl:if>
+
+        <!-- RCM 383 note -->
+        <xsl:if test="marc:datafield[@tag=383]">
+            <span class="results_summary 383_note">
+                <span class="label">Thematic number: </span>
+                <xsl:for-each select="marc:datafield[@tag=383]">
+                    <xsl:call-template name="subfieldSelect">
+                        <xsl:with-param name="codes">abcdgo</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:for-each>
+                <xsl:choose>
+                    <xsl:when test="position()=last()">
+                        <xsl:text></xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
+        </xsl:if>
+
+        <!-- RCM 987 -->
+        <xsl:if test="marc:datafield[@tag=987]">
+            <span class="results_summary 987_shelf">
+                <span class="label">Shelfmark: </span>
+                <xsl:for-each select="marc:datafield[@tag=987]">
+                    <xsl:call-template name="subfieldSelect">
+                        <xsl:with-param name="codes">a</xsl:with-param>
+                    </xsl:call-template>
+                </xsl:for-each>
+                <xsl:choose>
+                    <xsl:when test="position()=last()">
+                        <xsl:text></xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:text> </xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </span>
         </xsl:if>
 
         <!-- Other Title  Statement: Alternate Graphic Representation (MARC 880) -->
