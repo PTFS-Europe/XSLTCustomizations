@@ -1032,23 +1032,6 @@
         </xsl:for-each>
     </xsl:if>
 
-<!-- DDC classification -->
-    <xsl:if test="marc:datafield[@tag=082]">
-        <span class="results_summary ddc">
-            <span class="label">DDC classification: </span>
-            <ul class="resource_list">
-                <xsl:for-each select="marc:datafield[@tag=082]">
-                    <li>
-                        <xsl:call-template name="subfieldSelect">
-                            <xsl:with-param name="codes">a2b</xsl:with-param>
-                            <xsl:with-param name="delimeter"><xsl:text>&#160;</xsl:text></xsl:with-param>
-                        </xsl:call-template>
-                    </li>
-                </xsl:for-each>
-            </ul>
-        </span>
-    </xsl:if>
-
 <!-- LOC classification -->
     <xsl:if test="marc:datafield[@tag=050]">
         <span class="results_summary loc">
