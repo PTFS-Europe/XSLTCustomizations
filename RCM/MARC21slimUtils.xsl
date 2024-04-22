@@ -485,8 +485,7 @@
                     <xsl:choose>
                         <xsl:when test="$UseControlNumber = '1' and marc:subfield[@code='w']">
                             <a>
-                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />
-                                    ?q=rcn:<xsl:value-of
+                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />?q=rcn:<xsl:value-of
                                         select="str:encode-uri(marc:subfield[@code='w'], true())" /></xsl:attribute>
                                 <xsl:call-template name="chopPunctuation">
                                     <xsl:with-param name="chopString">
@@ -499,8 +498,7 @@
                         </xsl:when>
                         <xsl:when test="marc:subfield[@code=9] and $UseAuthoritiesForTracings='1'">
                             <a>
-                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />
-                                    ?q=an:<xsl:value-of
+                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />?q=an:<xsl:value-of
                                         select="str:encode-uri(marc:subfield[@code=9], true())" /></xsl:attribute>
                                 <xsl:call-template name="chopPunctuation">
                                     <xsl:with-param name="chopString">
@@ -513,8 +511,7 @@
                         </xsl:when>
                         <xsl:otherwise>
                             <a>
-                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />
-                                    ?q=se,phr:"<xsl:value-of
+                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />?q=se,phr:"<xsl:value-of
                                         select="str:encode-uri(marc:subfield[@code='t'], true())" />
                                     "&amp;q=au:"<xsl:value-of
                                         select="str:encode-uri(marc:subfield[@code='a'], true())" />
@@ -548,8 +545,7 @@
                     <xsl:choose>
                         <xsl:when test="$UseControlNumber = '1' and marc:subfield[@code='w']">
                             <a>
-                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />
-                                    ?q=rcn:<xsl:value-of select="marc:subfield[@code='w']" /></xsl:attribute>
+                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />?q=rcn:<xsl:value-of select="marc:subfield[@code='w']" /></xsl:attribute>
                                 <xsl:call-template name="chopPunctuation">
                                     <xsl:with-param name="chopString">
                                         <xsl:call-template name="subfieldSelect">
@@ -558,11 +554,11 @@
                                     </xsl:with-param>
                                 </xsl:call-template>
                             </a>
+                            ?
                         </xsl:when>
                         <xsl:when test="marc:subfield[@code=9] and $UseAuthoritiesForTracings='1'">
                             <a>
-                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />
-                                    ?q=an:<xsl:value-of
+                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />?q=an:<xsl:value-of
                                         select="str:encode-uri(marc:subfield[@code=9], true())" /></xsl:attribute>
                                 <xsl:call-template name="chopPunctuation">
                                     <xsl:with-param name="chopString">
@@ -575,8 +571,7 @@
                         </xsl:when>
                         <xsl:otherwise>
                             <a>
-                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />
-                                    ?q=se,phr:"<xsl:value-of
+                                <xsl:attribute name="href"><xsl:value-of select="$searchurl" />?q=se,phr:"<xsl:value-of
                                         select="str:encode-uri(marc:subfield[@code='a'], true())" />
                                     "</xsl:attribute>
                                 <xsl:call-template name="chopPunctuation">
