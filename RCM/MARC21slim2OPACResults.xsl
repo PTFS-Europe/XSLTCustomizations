@@ -1329,32 +1329,32 @@
 
         <!-- RCM 383 note -->
         <xsl:if test="marc:datafield[@tag=383]">
-            <span class="results_summary 383_note">
-                <xsl:choose>
-                    <xsl:when test="marc:datafield[@tag=383]/marc:subfield[@code='a'] != ''">
+            <xsl:for-each select="marc:datafield[@tag=383]">
+                <xsl:if test="marc:subfield[@code='a']">
+                    <span class="results_summary 383_note">
                         <span class="label">Serial number: </span>
-                    </xsl:when>
-                    <xsl:when test="marc:datafield[@tag=383]/marc:subfield[@code='b'] != ''">
+                        <xsl:call-template name="subfieldSelect">
+                            <xsl:with-param name="codes">a</xsl:with-param>
+                        </xsl:call-template>
+                    </span>
+                </xsl:if>
+                <xsl:if test="marc:subfield[@code='b']">
+                    <span class="results_summary 383_note">
                         <span class="label">Opus number: </span>
-                    </xsl:when>
-                    <xsl:otherwise>
+                        <xsl:call-template name="subfieldSelect">
+                            <xsl:with-param name="codes">b</xsl:with-param>
+                        </xsl:call-template>
+                    </span>
+                </xsl:if>
+                <xsl:if test="marc:subfield[@code='c']">
+                    <span class="results_summary 383_note">
                         <span class="label">Thematic number: </span>
-                    </xsl:otherwise>
-                </xsl:choose>
-                <xsl:for-each select="marc:datafield[@tag=383]">
-                    <xsl:call-template name="subfieldSelect">
-                        <xsl:with-param name="codes">abcdgo</xsl:with-param>
-                    </xsl:call-template>
-                </xsl:for-each>
-                <xsl:choose>
-                    <xsl:when test="position()=last()">
-                        <xsl:text></xsl:text>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text> </xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </span>
+                        <xsl:call-template name="subfieldSelect">
+                            <xsl:with-param name="codes">c</xsl:with-param>
+                        </xsl:call-template>
+                    </span>
+                </xsl:if>
+            </xsl:for-each>
         </xsl:if>
 
         <!-- RCM 987 -->
