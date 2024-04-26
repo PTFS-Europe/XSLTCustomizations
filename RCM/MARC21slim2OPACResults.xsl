@@ -1334,7 +1334,7 @@
                     <xsl:when test="marc:datafield[@tag=383]/marc:subfield[@code='a'] != ''">
                         <span class="label">Serial number: </span>
                     </xsl:when>
-                    <xsl:when test="marc:datafield[@tag=383]/marc:subfield[@code='e'] != ''">
+                    <xsl:when test="marc:datafield[@tag=383]/marc:subfield[@code='b'] != ''">
                         <span class="label">Opus number: </span>
                     </xsl:when>
                     <xsl:otherwise>
